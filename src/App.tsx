@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {HomeScreen} from './presentation/screens/home/HomeScreen';
+import {Navigation} from './presentation/navigation/Navigation';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -18,7 +18,7 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <HomeScreen />
+      <Navigation />
     </NavigationContainer>
   );
 }
