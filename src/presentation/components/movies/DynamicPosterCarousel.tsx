@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState, useCallback} from 'react';
 import {
   View,
   ScrollView,
@@ -18,12 +18,34 @@ interface Props {
 export const DynamicPosterCarousel = ({height = 440, movies}: Props) => {
   const scrollViewRef = useRef<ScrollView>(null);
   const screenWidth = Dimensions.get('window').width;
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [_, setCurrentIndex] = useState(0);
   const scrollInterval = useRef<NodeJS.Timeout | null>(null);
 
   const posterWidth = screenWidth * 0.7;
   const sideSpacing = (screenWidth - posterWidth) / 2;
   const gap = 16;
+
+  const stopAutoplay = useCallback(() => {
+    if (scrollInterval.current) {
+      clearInterval(scrollInterval.current);
+    }
+  }, []);
+
+  const startAutoplay = useCallback(() => {
+    stopAutoplay(); // Certifica-se de não duplicar o intervalo
+    scrollInterval.current = setInterval(() => {
+      setCurrentIndex(prevIndex => {
+        const nextIndex = (prevIndex + 1) % movies.length;
+        if (scrollViewRef.current) {
+          scrollViewRef.current.scrollTo({
+            x: nextIndex * (posterWidth + gap),
+            animated: true,
+          });
+        }
+        return nextIndex;
+      });
+    }, 3000);
+  }, [movies.length, posterWidth, gap, stopAutoplay]);
 
   useEffect(() => {
     if (movies.length > 0) {
@@ -33,27 +55,7 @@ export const DynamicPosterCarousel = ({height = 440, movies}: Props) => {
     return () => {
       stopAutoplay();
     };
-  }, [movies, currentIndex, posterWidth]);
-
-  const startAutoplay = () => {
-    stopAutoplay(); // Certifica-se de não duplicar o intervalo
-    scrollInterval.current = setInterval(() => {
-      const nextIndex = (currentIndex + 1) % movies.length; // Próximo índice
-      setCurrentIndex(nextIndex); // Atualiza o estado
-      if (scrollViewRef.current) {
-        scrollViewRef.current.scrollTo({
-          x: nextIndex * (posterWidth + gap),
-          animated: true,
-        });
-      }
-    }, 3000); // Tempo em milissegundos (3 segundos)
-  };
-
-  const stopAutoplay = () => {
-    if (scrollInterval.current) {
-      clearInterval(scrollInterval.current);
-    }
-  };
+  }, [movies, startAutoplay, stopAutoplay]);
 
   const handleScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     // Obtém a posição atual de scroll
