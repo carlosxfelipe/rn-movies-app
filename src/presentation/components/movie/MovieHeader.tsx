@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 // import {FullMovie} from '../../../core/entities/movie.entity';
 import {StackActions, useNavigation} from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 interface Props {
   // movie: FullMovie;
@@ -25,6 +26,10 @@ export const MovieHeader = ({poster, originalTitle, title}: Props) => {
       <View style={{...styles.imageContainer, height: screenHeight * 0.7}}>
         <View style={styles.imageBorder}>
           <Image style={styles.posterImage} source={{uri: poster}} />
+          <LinearGradient
+            colors={['rgba(0,0,0,0.8)', 'transparent']}
+            style={styles.gradientOverlay}
+          />
         </View>
       </View>
 
@@ -74,6 +79,13 @@ const styles = StyleSheet.create({
   posterImage: {
     flex: 1,
   },
+  gradientOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '25%',
+  },
   marginContainer: {
     marginHorizontal: 20,
     marginTop: 20,
@@ -88,6 +100,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
+    paddingVertical: 25,
     zIndex: 999,
     elevation: 9,
     top: 35,

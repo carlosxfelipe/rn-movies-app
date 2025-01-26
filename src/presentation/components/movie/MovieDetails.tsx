@@ -23,7 +23,9 @@ export const MovieDetails = ({movie, cast}: Props) => {
         <Text style={{fontSize: 23, marginTop: 10, fontWeight: 'bold'}}>
           Sinopse
         </Text>
-        <Text style={{fontSize: 16}}>{movie.description}</Text>
+        <Text style={{fontSize: 16, textAlign: 'justify'}}>
+          {movie.description}
+        </Text>
 
         <Text style={{fontSize: 23, marginTop: 10, fontWeight: 'bold'}}>
           Orçamento

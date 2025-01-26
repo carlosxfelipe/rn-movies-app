@@ -1,9 +1,10 @@
+import {StatusBar} from 'react-native';
 // import {useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {ScrollView} from 'react-native-gesture-handler';
 import {RootStackParams} from '../../navigation/Navigation';
 import {useMovie} from '../../hooks/useMovie';
 import {FullScreenLoader} from '../../components/loaders/FullScreenLoader';
-import {ScrollView} from 'react-native-gesture-handler';
 import {MovieHeader} from '../../components/movie/MovieHeader';
 import {MovieDetails} from '../../components/movie/MovieDetails';
 
@@ -19,14 +20,21 @@ export const DetailsScreen = ({route}: Props) => {
   }
 
   return (
-    <ScrollView>
-      <MovieHeader
-        originalTitle={movie!.originalTitle}
-        title={movie!.title}
-        poster={movie!.poster}
+    <>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
       />
+      <ScrollView>
+        <MovieHeader
+          originalTitle={movie!.originalTitle}
+          title={movie!.title}
+          poster={movie!.poster}
+        />
 
-      <MovieDetails movie={movie!} cast={cast} />
-    </ScrollView>
+        <MovieDetails movie={movie!} cast={cast} />
+      </ScrollView>
+    </>
   );
 };
