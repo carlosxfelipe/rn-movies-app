@@ -10,7 +10,7 @@ export const HomeScreen: React.FC = () => {
   const {top} = useSafeAreaInsets();
   const {width, height} = useWindowDimensions();
 
-  const {isLoading, nowPlaying, popular} = useMovies();
+  const {isLoading, nowPlaying, popular, topRated, upcoming} = useMovies();
 
   if (isLoading) {
     return (
@@ -28,6 +28,11 @@ export const HomeScreen: React.FC = () => {
         {/* <PosterCarousel movies={nowPlaying} /> */}
         {!isLandscape && <DynamicPosterCarousel movies={nowPlaying} />}
         <HorizontalCarousel movies={popular} title="Filmes mais populares" />
+        <HorizontalCarousel
+          movies={topRated}
+          title="Filmes mais bem avaliados"
+        />
+        <HorizontalCarousel movies={upcoming} title="Filmes em breve" />
       </View>
     </ScrollView>
   );
