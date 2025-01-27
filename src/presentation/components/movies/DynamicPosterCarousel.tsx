@@ -6,6 +6,7 @@ import {
   StyleSheet,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  Platform,
 } from 'react-native';
 import {Movie} from '../../../core/entities/movie.entity';
 import {MoviePoster} from './MoviePoster';
@@ -23,7 +24,7 @@ export const DynamicPosterCarousel = ({height = 440, movies}: Props) => {
 
   const posterWidth = screenWidth * 0.7;
   const sideSpacing = (screenWidth - posterWidth) / 2;
-  const gap = 16;
+  const gap = Platform.OS === 'android' ? 48 : 16;
 
   const stopAutoplay = useCallback(() => {
     if (scrollInterval.current) {
@@ -99,5 +100,6 @@ const styles = StyleSheet.create({
   posterContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    // overflow: 'hidden',
   },
 });
