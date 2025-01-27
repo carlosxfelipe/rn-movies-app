@@ -21,6 +21,7 @@ interface Props {
   height?: number;
   width?: number;
   onPressImage?: (id: string | number) => void;
+  showIndicators?: boolean;
 }
 
 export const DynamicImageCarousel = ({
@@ -28,10 +29,11 @@ export const DynamicImageCarousel = ({
   width = 300,
   images,
   onPressImage,
+  showIndicators = false,
 }: Props) => {
   const scrollViewRef = useRef<ScrollView>(null);
   const screenWidth = Dimensions.get('window').width;
-  const [_, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const scrollInterval = useRef<NodeJS.Timeout | null>(null);
 
   const imageWidth = screenWidth * 0.7;
@@ -105,6 +107,20 @@ export const DynamicImageCarousel = ({
           </Pressable>
         ))}
       </ScrollView>
+
+      {showIndicators && (
+        <View style={styles.indicatorContainer}>
+          {images.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.indicator,
+                currentIndex === index && styles.activeIndicator,
+              ]}
+            />
+          ))}
+        </View>
+      )}
     </View>
   );
 };
@@ -129,5 +145,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.24,
     shadowRadius: 7,
     elevation: 9,
+  },
+  indicatorContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  indicator: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#ccc',
+    marginHorizontal: 4,
+  },
+  activeIndicator: {
+    backgroundColor: '#000',
+    transform: [{scale: 1.2}],
   },
 });
