@@ -21,12 +21,15 @@ export const HomeScreen: React.FC = () => {
 
   const isLandscape = width > height;
   const isTablet = width >= 600;
+  const showDynamicPosterCarousel = !(isLandscape || isTablet);
 
   return (
     <ScrollView>
       <View style={{marginTop: top + 20, paddingBottom: 30}}>
         {isTablet && <PosterCarousel movies={nowPlaying} />}
-        {!isLandscape && <DynamicPosterCarousel movies={nowPlaying} />}
+        {showDynamicPosterCarousel && (
+          <DynamicPosterCarousel movies={nowPlaying} />
+        )}
         <HorizontalCarousel
           movies={popular}
           title="Filmes mais populares"
