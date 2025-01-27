@@ -14,7 +14,10 @@ export const Navigation = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-      }}>
+        animation: 'fade',
+        gestureEnabled: true,
+      }}
+      detachInactiveScreens={false}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
