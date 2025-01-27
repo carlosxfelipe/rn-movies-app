@@ -9,6 +9,7 @@ import {
 // import {FullMovie} from '../../../core/entities/movie.entity';
 import {StackActions, useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from '@react-native-vector-icons/fontawesome6';
 
 interface Props {
   // movie: FullMovie;
@@ -48,7 +49,14 @@ export const MovieHeader = ({poster, originalTitle, title}: Props) => {
             }
           }}
           hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
-          <Text style={styles.backButtonText}>Voltar</Text>
+          {/* <Text style={styles.backButtonText}>Voltar</Text> */}
+          <Icon
+            name="chevron-left"
+            size={25}
+            color="white"
+            iconStyle="solid"
+            style={styles.iconShadow}
+          />
         </Pressable>
       </View>
     </>
@@ -110,6 +118,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 25,
     fontWeight: 'bold',
+    textShadowColor: 'rgba(0, 0, 0, 0.55)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+  },
+  iconShadow: {
     textShadowColor: 'rgba(0, 0, 0, 0.55)',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
