@@ -22,6 +22,7 @@ interface Props {
   width?: number;
   onPressImage?: (id: string | number) => void;
   showIndicators?: boolean;
+  indicatorColor?: string;
 }
 
 export const DynamicImageCarousel = ({
@@ -30,6 +31,7 @@ export const DynamicImageCarousel = ({
   images,
   onPressImage,
   showIndicators = false,
+  indicatorColor = '#000',
 }: Props) => {
   const scrollViewRef = useRef<ScrollView>(null);
   const screenWidth = Dimensions.get('window').width;
@@ -115,7 +117,10 @@ export const DynamicImageCarousel = ({
               key={index}
               style={[
                 styles.indicator,
-                currentIndex === index && styles.activeIndicator,
+                currentIndex === index && {
+                  ...styles.activeIndicator,
+                  backgroundColor: indicatorColor,
+                },
               ]}
             />
           ))}
@@ -127,7 +132,6 @@ export const DynamicImageCarousel = ({
 
 const styles = StyleSheet.create({
   carouselContainer: {
-    flex: 1,
     marginBottom: 20,
   },
   imageContainer: {
