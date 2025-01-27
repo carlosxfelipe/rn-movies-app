@@ -12,10 +12,16 @@ import {MoviePoster} from './MoviePoster';
 interface Props {
   movies: Movie[];
   title?: string;
+  icon?: React.ReactNode;
   loadNextPage?: () => void;
 }
 
-export const HorizontalCarousel = ({movies, title, loadNextPage}: Props) => {
+export const HorizontalCarousel = ({
+  movies,
+  title,
+  icon,
+  loadNextPage,
+}: Props) => {
   const isLoading = useRef(false);
 
   useEffect(() => {
@@ -39,22 +45,29 @@ export const HorizontalCarousel = ({movies, title, loadNextPage}: Props) => {
 
     isLoading.current = true;
 
-    // Cargar las siguientes películas
+    // Carregar os próximos filmes
     loadNextPage && loadNextPage();
   };
 
   return (
     <View style={{height: title ? 260 : 220}}>
       {title && (
-        <Text
+        <View
           style={{
-            fontSize: 30,
-            fontWeight: '300',
+            flexDirection: 'row',
+            alignItems: 'center',
             marginLeft: 10,
             marginBottom: 10,
           }}>
-          {title}
-        </Text>
+          {icon && <View style={{marginRight: 10}}>{icon}</View>}
+          <Text
+            style={{
+              fontSize: 26,
+              fontWeight: '300',
+            }}>
+            {title}
+          </Text>
+        </View>
       )}
 
       <FlatList

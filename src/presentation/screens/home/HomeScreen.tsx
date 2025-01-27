@@ -5,6 +5,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 // import {PosterCarousel} from '../../components/movies/PosterCarousel';
 import {DynamicPosterCarousel} from '../../components/movies/DynamicPosterCarousel';
 import {HorizontalCarousel} from '../../components/movies/HorizontalCarousel';
+import Icon from '@react-native-vector-icons/fontawesome6';
 
 export const HomeScreen: React.FC = () => {
   const {top} = useSafeAreaInsets();
@@ -31,13 +32,25 @@ export const HomeScreen: React.FC = () => {
         <HorizontalCarousel
           movies={popular}
           title="Filmes mais populares"
+          icon={
+            <Icon name="fire" size={22} color="#FF4500" iconStyle="solid" />
+          }
           loadNextPage={popularNextPage}
         />
         <HorizontalCarousel
           movies={topRated}
           title="Filmes mais bem avaliados"
+          icon={
+            <Icon name="star" size={22} color="#FFDB58" iconStyle="solid" />
+          }
         />
-        <HorizontalCarousel movies={upcoming} title="Filmes em breve" />
+        <HorizontalCarousel
+          movies={upcoming}
+          title="Filmes em breve"
+          icon={
+            <Icon name="calendar" size={22} color="#1E90FF" iconStyle="solid" />
+          }
+        />
       </View>
     </ScrollView>
   );
