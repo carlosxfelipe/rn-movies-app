@@ -19,12 +19,17 @@ interface Props {
 export const DynamicPosterCarousel = ({height = 440, movies}: Props) => {
   const scrollViewRef = useRef<ScrollView>(null);
   const screenWidth = Dimensions.get('window').width;
-  const [_, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const scrollInterval = useRef<NodeJS.Timeout | null>(null);
 
   const posterWidth = screenWidth * 0.7;
   const sideSpacing = (screenWidth - posterWidth) / 2;
   const gap = Platform.OS === 'android' ? 48 : 16;
+
+  const isAtStart = currentIndex === 0;
+  const isAtEnd = currentIndex === movies.length - 1;
+  const startPadding = isAtStart ? gap / 2 : sideSpacing - gap / 2;
+  const endPadding = isAtEnd ? gap / 2 : sideSpacing - gap / 2;
 
   const stopAutoplay = useCallback(() => {
     if (scrollInterval.current) {
@@ -75,7 +80,9 @@ export const DynamicPosterCarousel = ({height = 440, movies}: Props) => {
         snapToInterval={posterWidth + gap}
         decelerationRate="fast"
         contentContainerStyle={{
-          paddingHorizontal: sideSpacing - gap / 2,
+          // paddingHorizontal: sideSpacing - gap / 2,
+          paddingLeft: startPadding,
+          paddingRight: endPadding,
         }}
         onMomentumScrollEnd={handleScrollEnd}>
         {movies.map(movie => (
