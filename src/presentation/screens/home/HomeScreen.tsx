@@ -1,10 +1,11 @@
-import {Text, useWindowDimensions, View} from 'react-native';
+import {useWindowDimensions, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useMovies} from '../../hooks/useMovies';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {PosterCarousel} from '../../components/movies/PosterCarousel';
 import {DynamicPosterCarousel} from '../../components/movies/DynamicPosterCarousel';
 import {HorizontalCarousel} from '../../components/movies/HorizontalCarousel';
+import {FullScreenLoader} from '../../components/loaders/FullScreenLoader';
 import Icon from '@react-native-vector-icons/fontawesome6';
 
 export const HomeScreen: React.FC = () => {
@@ -15,11 +16,7 @@ export const HomeScreen: React.FC = () => {
     useMovies();
 
   if (isLoading) {
-    return (
-      <View>
-        <Text>Carregando...</Text>
-      </View>
-    );
+    return <FullScreenLoader />;
   }
 
   const isLandscape = width > height;
