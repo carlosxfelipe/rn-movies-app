@@ -19,15 +19,13 @@ interface ImageData {
 interface Props {
   images: ImageData[];
   height?: number;
-  width?: number;
   onPressImage?: (id: string | number) => void;
   showIndicators?: boolean;
   indicatorColor?: string;
 }
 
 export const DynamicImageCarousel = ({
-  height = 440,
-  width = 300,
+  height = 180,
   images,
   onPressImage,
   showIndicators = false,
@@ -103,7 +101,7 @@ export const DynamicImageCarousel = ({
               {width: imageWidth, marginHorizontal: gap / 2},
             ]}>
             <Image
-              style={[styles.image, {width, height}]}
+              style={[styles.image, {width: imageWidth, height}]}
               source={{uri: image.uri}}
             />
           </Pressable>
