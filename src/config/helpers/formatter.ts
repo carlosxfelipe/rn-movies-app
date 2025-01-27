@@ -1,7 +1,7 @@
 export class Formatter {
   public static currency(value: number | null | undefined): string {
-    if (value === null || value === undefined || isNaN(value)) {
-      return '-';
+    if (value === 0 || value === null || value === undefined || isNaN(value)) {
+      return 'Valor não disponível';
     }
 
     return new Intl.NumberFormat('en-US', {
