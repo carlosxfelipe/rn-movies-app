@@ -30,7 +30,9 @@ Este é um projeto **React Native CLI** desenvolvido para exibir informações s
 3. **Configure as variáveis de ambiente**
 
    - Faça uma cópia do arquivo `.env.template` e renomeie para `.env`.
+
    - Insira sua chave da API do TMDB na variável `THE_MOVIE_DB_KEY`.
+   - Se der algum problema no react-native-dotenv, coloque temporariamente a key diretamente no **movieDBFetcher**.
 
 4. **Execute o projeto**
 
