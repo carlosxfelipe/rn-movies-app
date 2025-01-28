@@ -3,7 +3,7 @@
 Este é um projeto **React Native CLI** desenvolvido para exibir informações sobre filmes, utilizando a **API do The Movie Database (TMDB)**.
 
 <p align="center">
-  <img src="./323shots_so.png" alt="Preview do Projeto" />
+  <img src="./587shots_so.png" alt="Preview do Projeto" />
 </p>
 
 ## Pré-requisitos
